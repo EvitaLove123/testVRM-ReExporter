@@ -1,18 +1,17 @@
-# UniVRM 0.106.0 implementation plan
+# Implementation notes
 
-This repository targets **VRM 0.x in → VRM 0.x out**, using UniVRM 0.106.0.
+## Goal
+Import VRM 0.x, re-export VRM 0.x with **UniVRM 0.106.0**, then download the output in a browser.
 
-## Current state
-- Android-friendly file picker UI: `web/index.html`
-- Unity bridge scaffold: `unity/Assets/Scripts/VrmReExportBridge.cs`
-- Actual import/export and WebGL byte transfer: **not implemented yet**
+## Dependencies
+VRM 0.x uses UniVRM packages com.vrmc.gltf and com.vrmc.univrm. Pin the 0.106.0 release/tag and verify Unity compatibility.
 
-## Required implementation
-1. Add a Unity project and install UniVRM 0.106.0.
-2. Implement VRM 0.x import with the exact API in the installed package.
-3. Export the imported instance as VRM 0.x (do not convert to VRM 1.0).
-4. Add a WebGL .jslib bridge: browser File bytes → Unity; exported bytes → browser Blob download.
-5. Build WebGL and publish its build output under `web/`.
-6. Test with the supplied sample and VRM Posing Mobile.
+## Remaining work
+1. Create/open a Unity project and install UniVRM 0.106.0.
+2. Implement runtime VRM 0.x import (not VRM 1.0 migration).
+3. Export the loaded avatar as VRM 0.x.
+4. Implement WebGL JS ↔ Unity byte transfer and browser Blob download.
+5. Build WebGL and deploy its output to GitHub Pages.
+6. Test with the sample model and VRM Posing Mobile.
 
-Do not treat changing the metadata exporter string alone as a re-export: the model must pass through the actual UniVRM importer/exporter.
+A static HTML page cannot run Unity C# runtime. GitHub Pages can host compiled WebGL, but cannot compile Unity itself. Use exact APIs from UniVRM 0.106.0 source/samples; don't guess signatures.
