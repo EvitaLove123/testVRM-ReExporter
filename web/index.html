@@ -1,21 +1,28 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VRM-ReExporter</title><style>
-*{box-sizing:border-box}body{margin:0;background:#10131b;color:#eef2ff;font:16px system-ui;display:grid;min-height:100vh;place-items:center;padding:20px}
-main{width:min(680px,100%);background:#1a2030;border:1px solid #30394e;border-radius:22px;padding:26px;box-shadow:0 20px 70px #0005}
-h1{margin:0 0 8px;font-size:clamp(26px,6vw,38px)}p{color:#aeb9d2;line-height:1.6}.tag{display:inline-block;padding:5px 10px;border-radius:99px;background:#293a35;color:#a7f3d0;font-size:13px}
-.drop{margin:22px 0;border:2px dashed #52617f;border-radius:16px;padding:28px;text-align:center;background:#141a27}
-input{max-width:100%;margin:14px auto}button{border:0;border-radius:12px;background:#8b5cf6;color:white;font-weight:700;padding:13px 20px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
-.note{font-size:13px;background:#2a2638;border-radius:12px;padding:13px;color:#d8c9ff}
-#fileInfo{overflow-wrap:anywhere;color:#c4b5fd}
-</style></head><body><main>
-<span class="tag">Prototype · Android-friendly</span><h1>VRM-ReExporter</h1>
-<p>Chọn model VRM 0.x để chuẩn bị quy trình re-export. Bản này mới là giao diện thử nghiệm — chưa xử lý/chuyển đổi VRM.</p>
-<div class="drop"><strong>Chọn file VRM 0.x</strong><br><input id="file" type="file" accept=".vrm,model/gltf-binary"><div id="fileInfo">Chưa chọn file</div></div>
-<button id="export" disabled>Re-export (chưa khả dụng)</button>
-<p class="note">⚠️ Chưa có Unity WebGL + UniVRM runtime nên nút export đang khóa. Không upload model lên server; file chỉ được chọn trong trình duyệt.</p>
-<p>Engine mục tiêu: <b>UniVRM 0.106.0</b> · Format: <b>VRM 0.x</b></p>
-</main><script>
-const input=document.querySelector("#file"),info=document.querySelector("#fileInfo");
-input.addEventListener("change",()=>{const f=input.files?.[0];info.textContent=f?f.name+" · "+(f.size/1024/1024).toFixed(2)+" MB":"Chưa chọn file";});
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VRM Re-Exporter · UniVRM 0.106.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#0b1020;color:#eef2ff;font:16px system-ui;display:grid;place-items:center;padding:18px}
+main{width:min(720px,100%);background:#151c2e;border:1px solid #2d3955;border-radius:24px;padding:clamp(20px,5vw,36px);box-shadow:0 22px 80px #0006}
+.tag{display:inline-block;background:#183b34;color:#9af0ca;padding:6px 11px;border-radius:99px;font-size:13px}h1{font-size:clamp(28px,7vw,44px);margin:12px 0}p{color:#b8c4df;line-height:1.65}.target{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.target span{background:#222d46;border:1px solid #344365;padding:8px 12px;border-radius:12px}
+.upload{border:2px dashed #53668f;background:#10182a;border-radius:18px;padding:24px;text-align:center;margin:22px 0}
+input{display:block;margin:16px auto;max-width:100%}button{width:100%;border:0;border-radius:14px;padding:15px;background:#7257f5;color:white;font-weight:700;font-size:16px}
+button:disabled{background:#3b4260;color:#aab3cc}.info{overflow-wrap:anywhere;color:#c4b5fd;min-height:24px}
+.alert{padding:14px;background:#30283d;color:#e5d5ff;border-radius:14px;font-size:14px;line-height:1.6}.foot{font-size:12px;text-align:center;color:#7886a7;margin-top:20px}
+</style></head>
+<body><main>
+<span class="tag">VRM 0.x · UniVRM 0.106.0</span>
+<h1>VRM Re-Exporter</h1>
+<p>Import model VRM 0.x và re-export theo UniVRM 0.106.0 — mục tiêu tương thích VRM Posing Mobile.</p>
+<div class="target"><span>📥 VRM 0.x input</span><span>⚙️ UniVRM 0.106.0</span><span>📤 VRM 0.x output</span></div>
+<div class="upload"><strong>Chọn file VRM của mày</strong><input id="file" type="file" accept=".vrm,model/gltf-binary"><div class="info" id="info">Chưa chọn file</div></div>
+<button disabled id="export">Re-export (runtime chưa được build)</button>
+<p class="alert">⚠️ Trang này hiện là giao diện prototype. Chưa có Unity WebGL runtime nên nút re-export chưa hoạt động; file không được gửi lên server.</p>
+<p class="foot">Project testVRM-ReExporter · GitHub Pages</p>
+</main>
+<script>
+const f=document.querySelector('#file'),i=document.querySelector('#info');
+f.addEventListener('change',()=>{const x=f.files&&f.files[0];i.textContent=x?x.name+' · '+(x.size/1048576).toFixed(2)+' MB':'Chưa chọn file'});
 </script></body></html>
