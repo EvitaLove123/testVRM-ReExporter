@@ -18,5 +18,10 @@ mergeInto(LibraryManager.library, {
     anchor.click();
     document.body.removeChild(anchor);
     URL.revokeObjectURL(objectUrl);
+
+    var status = document.getElementById("info");
+    if (status) status.textContent = "Đã xuất file " + fileName;
+    var button = document.getElementById("export");
+    if (button) button.disabled = false;
   }
 });
